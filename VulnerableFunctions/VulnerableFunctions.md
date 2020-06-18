@@ -156,8 +156,7 @@ foreach($baska as $neyi=>$neyle){
 }
 ```
 Örneğimize yukarıdaki satırları ekledikten sonra çalıştırdığımızda kullanıcıdan aldığımız veriyi adres çubuğunda görebiliriz. Bu veriyi aşağıdaki gibi düzenlediğimizde system('id') fonksiyonunun çalıştırılır.
-
-............
+![resultss](https://github.com/fuxything/topluluk-makale/blob/master/VulnerableFunctions/img.png)
 Çalışan kodun çıktısı ise aşağıdaki gibidir.
 ```
 ORIGINAL: The quick brown fox jumped over the lazy dog. 
