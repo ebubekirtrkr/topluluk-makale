@@ -171,7 +171,19 @@ preg_replace('#' . preg_quote($neyi, '#') . '#', $neyle, $text);
 ```
 preg_quote fonksiyonu özel karakterlerin önüne '\' getirir. Özel karakterler ise şunlar: ". \ + * ? [ ^ ] $ ( ) { } = ! < > | : -". Yukarıda bahsedilen i ve e modifier'lar ise PHP'de yer alan "pattern modifier"larıdır. Bunlardan i harfler için e ise eval işlevini temsil eder.
 ### assert()
-.......
+Bu fonksiyon verilen ifadenin doğru olup olmadığını kontrol eder, eğer doğruysa bir sonraki satıra geçerer, eğer yanlışsa hata mesajı vererek programın çalışmasını durdurur. assert fonksiyonunu çalıştırabilmek için "Assertion" içindeki assertions değeri 1 olarak değiştirilmelidir.
+```
+<?php
+assert(print("HELLO"));
+?>
+```
+Yukarıdaki örnektede görülebileceği gibi içerisindeki herhangi bir ifadeyi çalıştırabilmektedir. Yani eval fonksiyonuna benzetebiliriz. Karşımıza "Code Execution" açığının çıktığını rahatlıkla görebiliriz. uygulama için tehlikeli hale gelmemesi adına assert fonksiyonu kullanım dışı bırakılabilir ya da kullanıcıdan veri alınan bir noktada alınan veriler kontrol edilebilir. 
+```
+<?php
+assert($val = $_GET['val']);
+?>
+```
+Yukarıdaki örnekte assert içerisinde kullanıcıdan bir veri alındığını görebiliyoruz. Kullanıcı veri değeri olarak system('id') girerse fonksiyonun çalıştırılır. Eğer girilen değer tekrar karşımıza başka bi yerde çıkıyorsa bu alanda yazdığımız system('id') fonksiyonunun sonucunu görürüz.
 
 ### Referanslar:
 * https://medium.com/swlh/hacking-python-applications-5d4cd541b3f1
