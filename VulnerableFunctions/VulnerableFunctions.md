@@ -63,3 +63,66 @@ prog = 'a=5\nb=10\nprint(a+b)'
 exec(prog)
 ```
 Diğer bir fark ise eval dönüş değeri olarak çalıştırdığı ifadenin sonucunu verir, exec ise her zaman none döner, dönüş değeri exec için önemli değildir.
+## C
+İkinci olarak C' de yer alan fonksiyonları inceeyeceğiz. Burada gets, strcpy, strcat ve printf fonksiyonlarını ele alacağız. Aşağıda da görülebileceği üzere C dilinde yer alan bu fonksiyonlardaki açıklar buffer overflow ile alakalıdır.
+### gets()
+Bu fonksiyon kullanıcıdan input almak amacıyla kullanılmaktadır.
+```
+int main(){
+   char name[10];
+   gets(name);
+}
+```
+Örnekte de olduğu gibi gets() fonksiyonu kullanılarak alınan verinin boyutunda herhangi bir sınırlama yapamıyoruz. Veriye sınırlama getirilmemesi overflow' a sebep olabilir. Bunu önlemek için aynı işlevi gören fgets() methodu kullanılabilir.
+```
+int main(){
+  char name[10];
+  fgets(name, 10, stdin);
+}
+```
+Örnekte de görüldüğü gibi fgets() parametre olarak uzunluk bilgisi alabilmekte dolayısıyla dinamik bir şekilde buffer için yer ayrılabilir ya da ayrılan yere göre uzunluk bilgisi girilebilir. Bu şekilde buffer overflow atağının önüne geçilebilir.
+### strcpy()
+Bu fonksiyon bir string ifadeyi başka bir string ifadenin içerisine kopyalamamıza yardımcı oluyor. Ancak gets() fonksiyonunda olduğu gibi source ve destination string değerlerinin boyutları sınırlandırılmadığı için buffer overflow açığı oluşabilmektedir.
+```
+int main(){
+char name[10];
+strcpy(name, "hello");
+}
+```
+strcpy() fonksiyonu yerine strlcpy() fonksiyonu kullanılacak olursa aşağıdaki örnekte olduğu gibi kopyalanacak olan string ifadenin boyutu sınırlandırılmış olur.
+```
+int main(){
+char name[10];
+strlcpy(name, "hello", 10);
+}
+```
+### strcat()
+Bu fonksiyon iki string ifadeyi birleştirmek için kullanılır.
+```
+int main(){
+   char first[10] = "hello ";
+   char second[10] = "word";
+   strcat(first, second);
+   printf("%s", first);
+}
+```
+Yukarıdaki kodun çıktısı aşağıdaki gibidir.
+```
+hello word
+```
+strcpy() fonksiyonunda olduğu gibi source değişkeninin boyu sınırlandırılmadığı durumda birleştirilmiş ifadelerin atılacağı destination değişkeninin boyunun aşılma ihtimali doğar. Bu da buffer over flow attağı yapılabilir anlamına geliyor.
+### printf()
+Bu fonksiyon ekrana yazı yazmak amaçlı kullanılmaktadır.
+```
+int main(){
+    char name[10];
+    gets(name);
+    printf(name);
+}
+```
+Yukarıdaki örnekte kullanıcıdan alınan name bilgisi yerine format parametreleri girilerek "Format String Attack" yapılabilir. Stack'de tutulan verileri çekebiliriz. Örneğin name yerine "%s" yazdığımız durumda stack'de tutulan string bir ifadeyi çıktımızda görebiliriz.
+```
+printf("%s", name);
+```
+Örnekte yapılan ufak değişiklik ile yazılan kodu güvenli hale getirebiliriz. String format atağına hedef olmamak için yapılması gereken ilk adım format paremetreleri ile bu parametreleri kullanan fonksiyonlarda parametrelere karşılık gelen değişken sayısı eşit olması gerekir. Kullanıcıdan alınan veriler bu fonksiyonlarda direkt kullanılmamalıdır.
+
