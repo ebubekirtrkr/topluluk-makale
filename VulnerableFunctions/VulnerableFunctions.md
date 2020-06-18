@@ -1,13 +1,13 @@
 # Programlama Dillerindeki Ölümcül Açıklar
 Bu yazımızda programlama dillerinde sıkça kullanılan fonksiyonlardan ve bunlarda yer alan açıklardan bahsedeceğiz. Ek olarak da bu açıkların oluşmasında engel olacak şekilde kodlarımızı nasıl düzenleyebileceğimize yer vereceğiz.
 ## Python
-İlk önce Python' da yer alan bazı fonksiyonları inceleyeceğiz. Burada input, str.format, eval ve exec fonksiyonlarını sırasıyla ele alacağız. Python'da karşımıza çıkan açıklar genellikle "Code Execution" başlığı altında incelenebilir. Bahsedeceğimiz açıklar için yazılan örnekler input fonksiyonu hariç Python 3 kullanılarak yazılmıştır. input fonksiyonu için Python 2 kullanılmıştır.
+İlk önce Python'da yer alan bazı fonksiyonları inceleyeceğiz. Burada input, str.format, eval ve exec fonksiyonlarını sırasıyla ele alacağız. Python'da karşımıza çıkan açıklar genellikle "Code Execution" başlığı altında incelenebilir. Bahsedeceğimiz açıklar için yazılan örnekler input fonksiyonu hariç Python 3 kullanılarak yazılmıştır. input fonksiyonu için Python 2 kullanılmıştır.
 ### input()
 Bu fonksiyonu kullanıcıdan veri almak amacıyla kullanıyoruz. Örneğini aşağıda görebilirsiniz.
 ```
 res = input("Guess the number: ")
 ```
-Kullanım şekli Python 2 ve 3' de aynı olan input fonksiyonu, Python 2' de aldığı veriyi direkt kullanırken Python 3' de string' e çevirir. Python 2' deki kullanımını aşağıdaki gibi örneklendirebiliriz.
+Kullanım şekli Python 2 ve 3'de aynı olan input fonksiyonu, Python 2'de aldığı veriyi direkt kullanırken Python 3'de string'e çevirir. Python 2'deki kullanımını aşağıdaki gibi örneklendirebiliriz.
 ```
 import random
 secret_number = random.randint(1,500)
@@ -21,16 +21,16 @@ while True:
         print "You lose"
         continue
 ```
-Yukarıda yer alan kod çalıştırıldığında sizden bir input beklemektedir. İstenilen input yerine secret_number yazıldığında ise ekrana "You win" yazısını bastığını görebilirsiniz. Bu da bize input fonksiyonunun kod çalıştırabildiğini gösteriyor. Peki bu açığı kapatma şansımız var mı? Python 3' de bu açığın oluşmamasının ana nedeni input fonksiyonunun aldığı değer üzerinde string dönüşümü yapmasıydı. benim bu noktada aklıma gelen ilk çözüm aşağıdaki gibi oldu.
+Yukarıda yer alan kod çalıştırıldığında sizden bir input beklemektedir. İstenilen input yerine secret_number yazıldığında ise ekrana "You win" yazısını bastığını görebilirsiniz. Bu da bize input fonksiyonunun kod çalıştırabildiğini gösteriyor. Peki bu açığı kapatma şansımız var mı? Python 3'de bu açığın oluşmamasının ana nedeni input fonksiyonunun aldığı değer üzerinde string dönüşümü yapmasıydı. benim bu noktada aklıma gelen ilk çözüm aşağıdaki gibi oldu.
 ```
 int(input("Guess the number: "))
 ```
 Ancak bu ifade ile kod çalıştırıldığında aynı açığın devam ettiğini görebilirsiniz. 
-Bu açığı kapatma maksadıyla Python 2' de raw_input fonksiyonu kullnılabilir.
+Bu açığı kapatma maksadıyla Python 2'de raw_input fonksiyonu kullnılabilir.
 ```
 raw_input("Guess the number: ")
 ```
-Python 3' de input fonksiyonundaki bu açık kapatılarak raw_input fonksiyonu ise kullanım dışı bırakılmıştır.
+Python 3'de input fonksiyonundaki bu açık kapatılarak raw_input fonksiyonu ise kullanım dışı bırakılmıştır.
 ### str.format()
 Bu fonksiyon string ifadeleri biçimlendirmek amacıyla kullanılmaktadır.
 ```
@@ -73,7 +73,7 @@ int main(){
    gets(name);
 }
 ```
-Örnekte de olduğu gibi gets() fonksiyonu kullanılarak alınan verinin boyutunda herhangi bir sınırlama yapamıyoruz. Veriye sınırlama getirilmemesi overflow' a sebep olabilir. Bunu önlemek için aynı işlevi gören fgets() methodu kullanılabilir.
+Örnekte de olduğu gibi gets() fonksiyonu kullanılarak alınan verinin boyutunda herhangi bir sınırlama yapamıyoruz. Veriye sınırlama getirilmemesi overflow'a sebep olabilir. Bunu önlemek için aynı işlevi gören fgets() methodu kullanılabilir.
 ```
 int main(){
   char name[10];
