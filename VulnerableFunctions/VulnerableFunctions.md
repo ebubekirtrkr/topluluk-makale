@@ -126,3 +126,53 @@ printf("%s", name);
 ```
 Örnekte yapılan ufak değişiklik ile yazılan kodu güvenli hale getirebiliriz. String format atağına hedef olmamak için yapılması gereken ilk adım format paremetreleri ile bu parametreleri kullanan fonksiyonlarda parametrelere karşılık gelen değişken sayısı eşit olması gerekir. Kullanıcıdan alınan veriler bu fonksiyonlarda direkt kullanılmamalıdır.
 
+## PHP
+Son olarak PHP'de yer alan preg_replace ve assert fonksiyonlarını ele alacağız.
+### preg_replace()
+Bu fonksiyon string bir ifade üzerinde değişiklik yapmamıza yardımcı olur.
+```
+<?php 
+   $text = 'The quick brown fox jumped over the lazy dog.'; 
+   echo "ORIGINAL: ".$text."<br>"; 
+   $reg[1] = '/brown/';
+   $reg[0] = '/fox/';
+   $news[0] = 'bear'; 
+   $news[1] = 'black'; 
+   ksort($reg); 
+   ksort($news); 
+   echo "RESULT: ".preg_replace($reg, $news, $text)."<br>"; 
+?>
+```
+Yukarıda verilen kodun çıktısı aşağıdaki gibi olmaktadır.
+```
+ORIGINAL: The quick brown fox jumped over the lazy dog. 
+RESULT: The quick black bear jumped over the lazy dog.
+```
+Örnekten de anlaşılacağı gibi ifadeler üzerinde rahatlıkla değişiklik yapmamıza sağlayan bu fonksiyon regex ifadeleri çalıştırabiliyor.
+```
+$baska = $_GET["baska"];
+foreach($baska as $neyi=>$neyle){     
+   echo "<br>RESULT: ".preg_replace($neyi, $neyle, $text)."<br>";           
+}
+```
+Örneğimize yukarıdaki satırları ekledikten sonra çalıştırdığımızda kullanıcıdan aldığımız veriyi adres çubuğunda görebiliriz. Bu veriyi aşağıdaki gibi düzenlediğimizde system('id') fonksiyonunun çalıştırılır.
+
+............
+Çalışan kodun çıktısı ise aşağıdaki gibidir.
+```
+ORIGINAL: The quick brown fox jumped over the lazy dog. 
+RESULT: The quick black bear jumped over the lazy dog. 
+uid=1(daemon) gid=1(daemon) groups=1(daemon) SON HALİ: The quick black bear jumped over the lazy uid=1(daemon) gid=1(daemon) groups=1(daemon).
+```
+Bağlantıda yer alan i modifier e ile yer değiştirilerek istenilen PHP fonksiyonunun çalışması sağlanmış oldu. preg_replace fonksiyonunu aşağıdaki gibi kullandığımız durumda system('id') fonksiyonunu çalıştıramaz.
+```
+preg_replace('#' . preg_quote($neyi, '#') . '#', $neyle, $text);
+```
+preg_quote fonksiyonu özel karakterlerin önüne '\' getirir. Özel karakterler ise şunlar: ". \ + * ? [ ^ ] $ ( ) { } = ! < > | : -". Yukarıda bahsedilen i ve e modifier'lar ise PHP'de yer alan "pattern modifier"larıdır. Bunlardan i harfler için e ise eval işlevini temsil eder.
+### assert()
+.......
+
+### Referanslar:
+* https://medium.com/swlh/hacking-python-applications-5d4cd541b3f1
+* https://medium.com/@int0x33/day-49-common-c-code-vulnerabilities-and-mitigations-7eded437ca4a
+* https://www.yeahhub.com/code-execution-preg_replace-php-function-exploitation/
