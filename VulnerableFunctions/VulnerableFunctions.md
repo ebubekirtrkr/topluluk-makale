@@ -1,7 +1,7 @@
 # Programlama Dillerindeki Ölümcül Açıklar
 Bu yazımızda programlama dillerinde sıkça kullanılan fonksiyonlardan ve bunlarda yer alan açıklardan bahsedeceğiz. Ek olarak da bu açıkların oluşmasında engel olacak şekilde kodlarımızı nasıl düzenleyebileceğimize yer vereceğiz.
 ## Python
-İlk önce Python'da yer alan bazı fonksiyonları inceleyeceğiz. Burada `input`, `str.format`, `eva`l ve `exec` fonksiyonlarını sırasıyla ele alacağız. Python'da karşımıza çıkan açıklar genellikle `"Code Execution"` başlığı altında incelenebilir. Bahsedeceğimiz açıklar için yazılan örnekler `input` fonksiyonu hariç Python 3 kullanılarak yazılmıştır. `input` fonksiyonu için Python 2 kullanılmıştır.
+İlk önce Python'da yer alan bazı fonksiyonları inceleyeceğiz. Burada `input`, `str.format`, `eval` ve `exec` fonksiyonlarını sırasıyla ele alacağız. Python'da karşımıza çıkan açıklar genellikle `"Code Execution"` başlığı altında incelenebilir. Bahsedeceğimiz açıklar için yazılan örnekler `input` fonksiyonu hariç Python 3 kullanılarak yazılmıştır. `input` fonksiyonu için Python 2 kullanılmıştır.
 ### input()
 Bu fonksiyonu kullanıcıdan veri almak amacıyla kullanıyoruz. Örneğini aşağıda görebilirsiniz.
 ```python
